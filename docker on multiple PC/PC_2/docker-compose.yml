@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  container2:
+    image: osrf/ros:humble-desktop
+    container_name: container2
+    stdin_open: true
+    tty: true
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    volumes:
+      - ./entrypoint_container2.sh:/entrypoint.sh
+    entrypoint: ["/entrypoint.sh"]

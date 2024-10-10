@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  container1:
+    image: osrf/ros:humble-desktop
+    container_name: container1
+    stdin_open: true
+    tty: true
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    volumes:
+      - ./entrypoint_container1.sh:/entrypoint.sh
+    entrypoint: ["/entrypoint.sh"]
+  
+  discovery_server:
+    image: osrf/ros:humble-desktop
+    container_name: discovery_server
+    stdin_open: true
+    tty: true
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    volumes:
+      - ./entrypoint_discovery.sh:/entrypoint.sh
+    ports:
+      - "11811:11811/udp"
+      - "11811:11811/tcp"
+    entrypoint: ["/entrypoint.sh"]
